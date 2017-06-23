@@ -7,6 +7,30 @@
 		file_put_contents($FILE_ZONE_A, "fastcgi_cache_path  /data/cache  levels=1:2    keys_zone=STATIC:2m    inactive=24h  max_size=1G;");
 	}
 
+	function validaDominio($domain_name)
+	{
+	    return (preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $domain_name) //valid chars check
+	            && preg_match("/^.{1,253}$/", $domain_name) //overall length check
+	            && preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $domain_name)   ); //length of each label
+	}
+
+	if($argv[1] == "all")
+	{
+		foreach(glob(__DIR__ . '/*/') as $dir)
+		{
+			if(is_dir($dir))
+			{
+				$BASENAME = basename($dir);
+				if($BASENAME == strtolower($BASENAME) && strpos($BASENAME, '.') && validaDominio($BASENAME) && !filter_var($BASENAME, FILTER_VALIDATE_IP))
+				{
+					echo "php isolaSite.php " . $BASENAME . '; ' . PHP_EOL;
+				}
+			}
+		}
+	}
+
+	#exit;
+
 	$DOMINIO = preg_replace("/[^0-9a-z\.\-]/", "", mb_strtolower(trim($argv[1])));
 
 	function usuariza($x)
