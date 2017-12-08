@@ -27,6 +27,8 @@ $WHITELIST_PHP = array(
         '/phpmyadmin' => true,
 
         '/wp-admin/post.php' => true,
+        '/wp-admin/term.php' => true,
+        '/wp-admin/terms.php' => true,
         '/wp-admin/edit.php' => true,
         '/wp-admin/index.php' => true,
         '/wp-admin/plugins.php' => true,
