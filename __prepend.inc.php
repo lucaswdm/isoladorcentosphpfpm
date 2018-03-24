@@ -11,7 +11,7 @@ if(isset($_GET['data2']))
 
 $WHITELIST_PHP = array(
 
-        'update.php' => true,
+        
         '/index.php' => true,
 
         'upgrade.php' => true,
@@ -23,14 +23,16 @@ $WHITELIST_PHP = array(
 
         '/wp-includes/js/tinymce/wp-tinymce.php' => true,
 
-        'wp-admin/install.php' => true,
+        '/wp-admin/install.php' => true,
         '/phpmyadmin' => true,
-
+        '/wp-admin/about.php' => true,        
+        '/wp-admin/post.php' => true,
         '/wp-admin/post.php' => true,
         '/wp-admin/term.php' => true,
         '/wp-admin/terms.php' => true,
         '/wp-admin/edit.php' => true,
         '/wp-admin/index.php' => true,
+        'update.php' => true,
         '/wp-admin/plugins.php' => true,
         '/wp-admin/load-scripts.php' => true,
         '/wp-admin/load-styles.php' => true,
