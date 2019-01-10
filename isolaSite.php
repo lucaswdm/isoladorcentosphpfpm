@@ -2,6 +2,16 @@
 
 	$FILE_ZONE_A = "/etc/nginx/conf.d/aaaaaaaaaaaa00000000.conf";
 
+	function randomstr($qtde = 10)
+	{
+		$characters = '0123456789abcdefghi#jklmnopqrstu@v#wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.#@';
+		$randstring = '';
+		for ($i = 0; $i < $qtde; $i++) {
+			$randstring .= $characters{rand(0, (strlen($characters)-1))};
+		}
+		return $randstring;
+	}
+
 	if(!is_file($FILE_ZONE_A))
 	{
 		file_put_contents($FILE_ZONE_A, "fastcgi_cache_path  /data/cache  levels=1:2    keys_zone=STATIC:2m    inactive=24h  max_size=1G;");
@@ -89,7 +99,15 @@
 	system("service php-fpm restart");
 
 
-	echo $USUARIO . PHP_EOL;
+	#echo $USUARIO . PHP_EOL;
+
+	$password = randomstr(20);
+	echo shell_exec('echo -e "'.$password.'\n'.$password.'" | passwd ' . $USUARIO);
+
+	echo PHP_EOL . "---------------------------------" . PHP_EOL;
+	echo "USER: " . $USUARIO . PHP_EOL;
+	echo "PASS: " . $password . PHP_EOL;
+	echo PHP_EOL . "---------------------------------" . PHP_EOL;
 
 
 
