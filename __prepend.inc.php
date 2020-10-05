@@ -85,7 +85,7 @@ if(isset($_SERVER['REQUEST_URI']))
                 if($D2BLOCK)
                 {
                         header('HTTP/1.0 403 Forbidden');
-                        @file_put_contents('/data/403-log.txt', $_SERVER['REQUEST_URI'] . PHP_EOL, FILE_APPEND);
+                        @file_put_contents('/tmp/403-log.txt', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . PHP_EOL, FILE_APPEND);
                         exit('Data2 - Security System - #' . $_SERVER['REQUEST_URI']);
                 }
         }
