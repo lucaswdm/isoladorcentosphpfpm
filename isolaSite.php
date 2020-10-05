@@ -2,6 +2,35 @@
 
 	$FILE_ZONE_A = "/etc/nginx/conf.d/aaaaaaaaaaaa00000000.conf";
 
+
+	function gethostatual()
+	{
+		return trim(shell_exec("/usr/bin/curl -4 http://ifconfig.co/ip 2>/dev/null"));
+	}
+
+	function findsshport()
+	{
+		foreach(array(22,22022,22222,2222,22987) as $port)
+		{
+			if(@fsockopen('localhost', $port)) return $port;
+		}
+
+		return 0;
+	}
+
+	function findftpport()
+	{
+		shell_exec("service vsftpd restart 2>/dev/null >/dev/null");
+		shell_exec("chkconfig vsftpd on 2>/dev/null >/dev/null");
+
+		foreach(array(21,22021) as $port)
+		{
+			if(@fsockopen('localhost', $port)) return $port;
+		}
+
+		return 0;
+	}
+
 	function randomstr($qtde = 10)
 	{
 		$characters = '0123456789abcdefghi#jklmnopqrstu@v#wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.#@';
@@ -69,7 +98,18 @@
 
 	$OWNER = posix_getpwuid(fileowner($DIR));
 
-	if($OWNER['name'] != 'data') geraErro('OWNER != data');
+	if($OWNER['name'] != 'data')
+	{
+		echo PHP_EOL;
+		$X = trim(strtoupper(readline("O USUARIO DESTE PROJETO É: " . $OWNER['name'] . ". DESEJA ALTERAR E ISOLAR? Y/N: ")));
+		if(!in_array($X, array('S', 'Y')))
+		{
+			echo PHP_EOL;
+			echo PHP_EOL;
+			exit;
+		}
+		#geraErro('OWNER != data');
+	}
 
 	$USUARIO = usuariza($DOMINIO);
 
@@ -104,10 +144,26 @@
 	$password = randomstr(20);
 	echo shell_exec('echo -e "'.$password.'\n'.$password.'" | passwd ' . $USUARIO);
 
-	echo PHP_EOL . "---------------------------------" . PHP_EOL;
-	echo "USER: " . $USUARIO . PHP_EOL;
-	echo "PASS: " . $password . PHP_EOL;
-	echo PHP_EOL . "---------------------------------" . PHP_EOL;
+	echo PHP_EOL;echo PHP_EOL;echo PHP_EOL;
+	#echo ;
+	echo PHP_EOL . '+------|DADOS DE ACESSO|-------+';
+	echo PHP_EOL . 'HOST: ' . gethostatual();
+	echo PHP_EOL . 'SFTP PORT: ' . findsshport();
+	if($portaftp = findftpport())
+	{
+		if($portaftp)
+		{
+			echo PHP_EOL . 'FTP PORT: ' . $portaftp;
+		}
+	}
+
+	echo PHP_EOL . 'USUARIO: ' . $USUARIO;
+	echo PHP_EOL . 'SENHA: ' . $password . PHP_EOL;
+
+
+	echo  '+------------------------------+' . PHP_EOL;
+	echo "[ATENCAO] SFTP e FTP SAO PROTOCOLOS DIFERENTES. SEMPRE OPTE PELO SFTP (POR SEGURANCA)";
+	echo PHP_EOL;echo PHP_EOL;echo PHP_EOL;
 
 
 
