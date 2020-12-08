@@ -24,6 +24,7 @@ $WHITELIST_PHP = array(
         '/wp-includes/js/tinymce/wp-tinymce.php' => true,
 
         '/wp-admin/install.php' => true,
+         '/wp-admin/media' => true,
         '/phpmyadmin' => true,
         '/wp-admin/about.php' => true,        
         '/wp-admin/post.php' => true,
