@@ -33,6 +33,7 @@ $WHITELIST_PHP = array(
         '/wp-admin/edit.php' => true,
         '/wp-admin/index.php' => true,
         'update.php' => true,
+        '/wp-admin/post' => true,
         '/wp-admin/plugins.php' => true,
         '/wp-admin/load-scripts.php' => true,
         '/wp-admin/load-styles.php' => true,
