@@ -2,12 +2,6 @@
 
 $_SERVER['SERVER_NAME'] = $_SERVER['HTTP_HOST'];
 
-if(isset($_GET['data2']))
-{
-
-}
-
-
 
 $WHITELIST_PHP = array(
 
@@ -17,6 +11,7 @@ $WHITELIST_PHP = array(
         'upgrade.php' => true,
 
         '/wp-login.php' => true,
+
         'data2' => true,
 
         'setup-config.php' => true,
@@ -24,6 +19,7 @@ $WHITELIST_PHP = array(
         '/wp-includes/js/tinymce/wp-tinymce.php' => true,
 
         '/wp-admin/install.php' => true,
+        '/wp-admin/admin' => true,
          '/wp-admin/media' => true,
         '/phpmyadmin' => true,
         '/wp-admin/about.php' => true,        
@@ -59,7 +55,7 @@ $WHITELIST_PHP = array(
         '/wp-admin/tools.php' => true,
         'media-new.php' => true,
         'profile.php' => true,
-        'xmlrpc.php' => true,
+        #'xmlrpc.php' => true,
         'async-upload.php' => true,
 );
 
@@ -70,13 +66,13 @@ if(isset($_SERVER['REQUEST_URI']))
                 $D2BLOCK = true;
                 foreach($WHITELIST_PHP as $D2URL => $tmp)
                 {
-                        #echo $D2URL . "<hr>";
+                        
+                    if(strpos($_SERVER['REQUEST_URI'], $D2URL) !== false)
+                    {
+                            $D2BLOCK = false;
+                            break;
+                    }
 
-                        if(strpos($_SERVER['REQUEST_URI'], $D2URL) !== false)
-                        {
-                                $D2BLOCK = false;
-                                break;
-                        }
                 }
 
                 if(strpos($_SERVER['REQUEST_URI'], "wp-content/uploads") !== false)
@@ -87,9 +83,9 @@ if(isset($_SERVER['REQUEST_URI']))
                 if($D2BLOCK)
                 {
                         header('HTTP/1.0 403 Forbidden');
-                        @file_put_contents('/tmp/403-log.txt', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . PHP_EOL, FILE_APPEND);
-                        exit('Data2 - Security System - #' . $_SERVER['REQUEST_URI']);
+                        #@file_put_contents('/tmp/403-log.txt', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . PHP_EOL, FILE_APPEND);
+                        //exit('Data2 - Security System - #' . $_SERVER['REQUEST_URI']);
+                        exit("<div id='ouro-cloud-container'>Ouro.Cloud - Security System...</div><script>var request = new XMLHttpRequest(); request.onreadystatechange = function() { if(request.readyState == 4 && request.status == 200) { document.getElementById('ouro-cloud-container').innerHTML = request.responseText; } } ; request.open('GET', 'https://ouro.cloud/templates/security/?from=' + encodeURIComponent(window.location.href)); request.send();</script>");
                 }
         }
 }
-
