@@ -49,6 +49,7 @@ $WHITELIST_PHP = array(
         '/wp-admin/nav-menus.php' => true,
         '/wp-admin/user' => true,
         '/wp-admin/customize.php' => true,
+        '/wp-admin/revision' => true,
         '/wp-admin/edit-comments.php' => true,
         '/wp-admin/upload.php' => true,
         '/wp-admin/themes.php' => true,
