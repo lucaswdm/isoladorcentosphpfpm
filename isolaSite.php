@@ -12,7 +12,7 @@
 	{
 		foreach(array(22,22022,22222,2222,22987) as $port)
 		{
-			if(@fsockopen('localhost', $port)) return $port;
+			iif(@fsockopen('localhost', $port, $a, $b, 2)) return $port;
 		}
 
 		return 0;
@@ -25,7 +25,7 @@
 
 		foreach(array(21,22021) as $port)
 		{
-			if(@fsockopen('localhost', $port)) return $port;
+			if(@fsockopen('localhost', $port, $a, $b, 2)) return $port;
 		}
 
 		return 0;
