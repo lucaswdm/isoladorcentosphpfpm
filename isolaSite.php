@@ -5,7 +5,7 @@
 
 	function gethostatual()
 	{
-		return trim(shell_exec("/usr/bin/curl -4 http://ifconfig.co/ip 2>/dev/null"));
+		return trim(shell_exec("/usr/bin/curl -4 -L data2.com.br/ip 2>/dev/null"));
 	}
 
 	function findsshport()
