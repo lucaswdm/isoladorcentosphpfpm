@@ -33,12 +33,7 @@
 
 	function randomstr($qtde = 10)
 	{
-		$characters = '0123456789abcdefghi#jklmnopqrstu@v#wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.#@';
-		$randstring = '';
-		for ($i = 0; $i < $qtde; $i++) {
-			$randstring .= $characters{rand(0, (strlen($characters)-1))};
-		}
-		return $randstring;
+		return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',32)),0,$qtde);
 	}
 
 	if(!is_file($FILE_ZONE_A))
