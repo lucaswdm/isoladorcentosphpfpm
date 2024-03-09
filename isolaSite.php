@@ -93,7 +93,7 @@
 
 	$OWNER = posix_getpwuid(fileowner($DIR));
 
-	if($OWNER['name'] != 'data')
+	/*if($OWNER['name'] != 'data')
 	{
 		echo PHP_EOL;
 		$X = trim(strtoupper(readline("O USUARIO DESTE PROJETO É: " . $OWNER['name'] . ". DESEJA ALTERAR E ISOLAR? Y/N: ")));
@@ -105,6 +105,7 @@
 		}
 		#geraErro('OWNER != data');
 	}
+*/
 
 	$USUARIO = usuariza($DOMINIO);
 
