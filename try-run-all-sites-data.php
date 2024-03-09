@@ -13,7 +13,7 @@
 
 		#echo $DOMINIO . PHP_EOL;
 
-		if($OWNER['name'] == 'data')
+		#if($OWNER['name'] == 'data')
 		{
 			if(is_file($dir . 'wp-settings.php'))
 			{
