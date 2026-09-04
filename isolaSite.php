@@ -69,8 +69,8 @@
 
 	function usuariza($x)
     {
-            $x = preg_replace("/[^0-9a-z]/", "_", mb_strtolower(trim($x)));
-            return substr($x,0,8) . (abs(crc32($x)) % 999);
+			$fulldomain = strtolower(str_replace(['.','-','_'], '', x));
+    		return substr($fulldomain,0,12) . '_' . substr(md5(x),0,8);          
     }
 
 
