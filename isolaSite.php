@@ -69,7 +69,7 @@
 
 	function usuariza($x)
     {
-			$fulldomain = strtolower(str_replace(['.','-','_'], '', x));
+			$fulldomain = strtolower(str_replace(['.','-','_'], '', $x));
     		return substr($fulldomain,0,12) . '_' . substr(md5(x),0,8);          
     }
 
